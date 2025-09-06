@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
+  <meta charset="UTF-8">
+  <title>📝 Signup</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg p-5 rounded-4 form-card">
+      <h2 class="text-center mb-4 fw-bold">📝 Sign Up</h2>
+      <form method="POST" action="/signup">
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Full Name</label>
+          <input type="text" name="name" class="form-control form-control-lg" placeholder="Enter full name" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Email</label>
+          <input type="email" name="email" class="form-control form-control-lg" placeholder="Enter email" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Password</label>
+          <input type="password" name="password" class="form-control form-control-lg" placeholder="Enter password" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100 btn-lg">✨ Sign Up</button>
+      </form>
+      <p class="text-center mt-3">Already have an account? <a href="login.html">Login</a></p>
+    </div>
+  </div>
+</body>
+</html>
