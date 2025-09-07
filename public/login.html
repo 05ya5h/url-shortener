@@ -1,51 +1,40 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>🔑 Login</title>
+<!doctype html>
+<html>
+<head><meta charset="utf-8"/><title>Login</title></head>
+<body>
+  <main>
+    <h2>Login</h2>
+    <form id="loginForm">
+      <input id="emailOrUsername" placeholder="Email or username" required><br>
+      <input id="password" type="password" placeholder="Password" required><br>
+      <button type="submit">Login</button>
+    </form>
+    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+  </main>
 
-  <!-- ✅ Bootstrap 5.3.2 (latest stable) -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
-        rel="stylesheet" 
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
-        crossorigin="anonymous">
-
-  <!-- ✅ Your CSS -->
-  <link rel="stylesheet" href="style.css">
-</head>
-<body class="bg-light">
-  <div class="container d-flex justify-content-center align-items-center vh-100">
-    <div class="card shadow-lg p-5 rounded-4 form-card w-100" style="max-width: 500px;">
-      <h2 class="text-center mb-4 fw-bold">🔑 Login</h2>
-
-      <!-- Login form -->
-      <form method="POST" action="/login">
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Email</label>
-          <input type="email" name="email" 
-                 class="form-control form-control-lg" 
-                 placeholder="Enter email" required>
-        </div>
-        <div class="mb-3">
-          <label class="form-label fw-semibold">Password</label>
-          <input type="password" name="password" 
-                 class="form-control form-control-lg" 
-                 placeholder="Enter password" required>
-        </div>
-        <button type="submit" class="btn btn-success w-100 btn-lg">🚀 Login</button>
-      </form>
-
-      <!-- Signup link -->
-      <p class="text-center mt-3">
-        Don't have an account? 
-        <a href="signup.html" class="fw-semibold">Sign up</a>
-      </p>
-    </div>
-  </div>
-
-  <!-- ✅ Bootstrap JS bundle (optional, for alerts/modals etc.) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
-          integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" 
-          crossorigin="anonymous"></script>
+  <script>
+    // quick inline script to handle login and store token
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const body = {
+        emailOrUsername: document.getElementById('emailOrUsername').value,
+        password: document.getElementById('password').value
+      };
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        });
+        const data = await res.json();
+        if (!res.ok) return alert(data.error || 'Login failed');
+        localStorage.setItem('token', data.token);
+        alert('Logged in');
+        window.location.href = '/';
+      } catch (err) {
+        alert('Network error');
+      }
+    });
+  </script>
 </body>
 </html>
